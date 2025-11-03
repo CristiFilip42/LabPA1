@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+int isPalindrom(int b) {
+    int b1 = b;
+    int V[20];
+    int i=0;
+    while (b1!=0) {
+        V[i] = b1%10;
+        b1 = b1/10;
+        i++;
+    }
+    for (int j=0; j<i/2; j++) {
+        if (V[j] != V[i-1-j]) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+int main(void) {
+    int n;
+    scanf("%d",&n);
+    if (isPalindrom(n) == 1)
+        printf("da");
+    else
+        printf("nu");
+}
