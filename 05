@@ -1,0 +1,63 @@
+#include <stdio.h>
+#include <stdlib.h> // Pentru malloc și free
+void citireMatrice(int *mat, int rows, int cols, const char *nume) {
+    printf("Introduceți elementele: ");
+    int i, j;
+    for (i = 0; i < rows; i++) {
+        for (j = 0; j < cols; j++) {
+            scanf("%d", (mat + i * cols + j));
+        }
+    }
+}
+
+void afisareMatrice(const int *mat, int rows, int cols, const char *nume) {
+    printf("matricea inmultita este \n");
+    int i, j;
+    for (i = 0; i < rows; i++) {
+        for (j = 0; j < cols; j++) {
+            printf("%6d", *(mat + i * cols + j));
+        }
+        printf("\n");
+    }
+}
+void inmultireMatrici(const int *matA, const int *matB, int *matC, int rowsA, int colsA, int colsB) {
+    int i, j, k;
+    for (i = 0; i < rowsA; i++) {
+        for (j = 0; j < colsB; j++) {
+            int suma = 0;
+
+            for (k = 0; k < colsA; k++) {
+                suma = suma + (*(matA + i * colsA + k)) * (*(matB + k * colsB + j));
+            }
+            *(matC + i * colsB + j) = suma;
+        }
+    }
+}
+
+
+int main() {
+    int m, n, p;
+
+    printf("Mat A: ");
+    scanf("%d %d", &m, &n);
+
+    printf("Mat B: ", n);
+    scanf("%d", &p);
+
+    int *matA = (int *)malloc(m * n * sizeof(int));
+    int *matB = (int *)malloc(n * p * sizeof(int));
+    int *matC = (int *)malloc(m * p * sizeof(int));
+
+    citireMatrice(matA, m, n, "A");
+    citireMatrice(matB, n, p, "B");
+
+    inmultireMatrici(matA, matB, matC, m, n, p);
+
+    afisareMatrice(matC, m, p, "C (A * B)");
+
+    free(matA);
+    free(matB);
+    free(matC);
+
+    return 0;
+}
