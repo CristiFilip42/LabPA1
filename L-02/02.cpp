@@ -54,14 +54,42 @@ int main() {
      NodeT *lista2 = NULL;
      NodeT *lista_rez = NULL;
 
-     NodeT* p1;
-     NodeT* p2;
+    inserare(&lista1, 20);
+    inserare(&lista1, 30);
+    inserare(&lista1, 15);
+    inserare(&lista1, 7);
 
-     while(lista1 != NULL || lista2 != NULL){
-       if(p1->key < p2->key)
-         inserare(&lista_rez, p1->key)
-       else(p2->key >p1->key)
-         inserare(&lista_rez, p2->key)
+   inserare(&lista2, 80);
+   inserare(&lista2, 10);
+   inserare(&lista2, 90);
+   inserare(&lista2, 17);
+
+   while (lista1 != NULL && lista2 !=NULL) {
+     if (lista1->key < lista2->key) {
+       inserare(&lista_rez, lista1->key);
+       lista1 = lista1->next;
+     }
+     else if (lista1->key > lista2->key) {
+       inserare(&lista_rez, lista2->key);
+       lista2 = lista2->next;
+     }
+     else {
+       lista1 = lista1->next;
+       lista2 = lista2->next;
+     }
+   }
+
+   while (lista1 != NULL) {
+     inserare(&lista_rez, lista1->key);
+     lista1 = lista1->next;
+   }
+
+   while (lista2 != NULL) {
+     inserare(&lista_rez, lista2->key);
+     lista2 = lista2->next;
+   }
+
+   afisare(lista_rez);
 
      return 0;
    }
