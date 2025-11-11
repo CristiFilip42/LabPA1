@@ -54,15 +54,23 @@ int main() {
      NodeT *lista2 = NULL;
      NodeT *lista_rez = NULL;
 
-    inserare(&lista1, 20);
-    inserare(&lista1, 30);
-    inserare(&lista1, 15);
-    inserare(&lista1, 7);
+    FILE *f1, *f2;
+    int key;
 
-   inserare(&lista2, 80);
-   inserare(&lista2, 10);
-   inserare(&lista2, 90);
-   inserare(&lista2, 17);
+   f1 = fopen("F1.txt", "r");
+   while (fscanf(f1, "%d", &key) == 1) {
+     inserare(&lista1, key);
+   }
+   fclose(f1);
+
+   f2 = fopen("F2.txt", "r");
+   while (fscanf(f2, "%d", &key) == 1) {
+     inserare(&lista2, key);
+   }
+   fclose(f2);
+
+   afisare(lista1);
+   afisare(lista2);
 
    while (lista1 != NULL && lista2 !=NULL) {
      if (lista1->key < lista2->key) {
